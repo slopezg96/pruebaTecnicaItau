@@ -1,0 +1,110 @@
+[
+  {
+    "id": "mock-001",
+    "title": "El nombre del viento",
+    "author": "Patrick Rothfuss",
+    "price": 18.99,
+    "currencyCode": "USD",
+    "description": "La historia de Kvothe, contada por él mismo: de niño en una trupe itinerante a leyenda viva, buscando la verdad detrás de los mitos que rodean su propia vida.",
+    "coverImageURL": null
+  },
+  {
+    "id": "mock-002",
+    "title": "Cien años de soledad",
+    "author": "Gabriel García Márquez",
+    "price": 15.5,
+    "currencyCode": "USD",
+    "description": "La saga de la familia Buendía a lo largo de siete generaciones en el pueblo imaginario de Macondo.",
+    "coverImageURL": null
+  },
+  {
+    "id": "mock-003",
+    "title": "1984",
+    "author": "George Orwell",
+    "price": 12.0,
+    "currencyCode": "USD",
+    "description": "Una distopía sobre la vigilancia total, la manipulación de la verdad y la resistencia del individuo frente al Gran Hermano.",
+    "coverImageURL": null
+  },
+  {
+    "id": "mock-004",
+    "title": "Sapiens: de animales a dioses",
+    "author": "Yuval Noah Harari",
+    "price": 19.99,
+    "currencyCode": "USD",
+    "description": "Un recorrido por la historia de la humanidad, desde la revolución cognitiva hasta la era digital.",
+    "coverImageURL": null
+  },
+  {
+    "id": "mock-005",
+    "title": "El principito",
+    "author": "Antoine de Saint-Exupéry",
+    "price": 9.99,
+    "currencyCode": "USD",
+    "description": "Un piloto varado en el desierto conoce a un pequeño príncipe que viene de un asteroide lejano, y juntos exploran preguntas esenciales sobre la vida.",
+    "coverImageURL": null
+  },
+  {
+    "id": "mock-006",
+    "title": "Dune",
+    "author": "Frank Herbert",
+    "price": 22.5,
+    "currencyCode": "USD",
+    "description": "En el desértico planeta Arrakis, Paul Atreides se ve envuelto en una lucha de poder, religión y ecología a escala galáctica.",
+    "coverImageURL": null
+  },
+  {
+    "id": "mock-007",
+    "title": "Fahrenheit 451",
+    "author": "Ray Bradbury",
+    "price": 13.75,
+    "currencyCode": "USD",
+    "description": "En una sociedad donde los libros están prohibidos y se queman, un bombero encargado de destruirlos empieza a cuestionar su papel.",
+    "coverImageURL": null
+  },
+  {
+    "id": "mock-008",
+    "title": "Rayuela",
+    "author": "Julio Cortázar",
+    "price": 16.25,
+    "currencyCode": "USD",
+    "description": "Una novela experimental que puede leerse en distinto orden, siguiendo la búsqueda existencial de Horacio Oliveira entre París y Buenos Aires.",
+    "coverImageURL": null
+  },
+  {
+    "id": "mock-009",
+    "title": "El hombre en busca de sentido",
+    "author": "Viktor Frankl",
+    "price": 11.4,
+    "currencyCode": "USD",
+    "description": "Reflexiones de un psiquiatra sobre su experiencia en campos de concentración y la búsqueda de sentido como motor esencial del ser humano.",
+    "coverImageURL": null
+  },
+  {
+    "id": "mock-010",
+    "title": "Los detectives salvajes",
+    "author": "Roberto Bolaño",
+    "price": 17.8,
+    "currencyCode": "USD",
+    "description": "Dos jóvenes poetas mexicanos emprenden una búsqueda que los lleva a través de México, Europa, Israel y África en busca de una poeta desaparecida.",
+    "coverImageURL": null
+  },
+  {
+    "id": "mock-011",
+    "title": "Clean Architecture",
+    "author": "Robert C. Martin",
+    "price": 29.99,
+    "currencyCode": "USD",
+    "description": "Una guía sobre cómo diseñar sistemas de software mantenibles, separando reglas de negocio de detalles de framework, UI y base de datos.",
+    "coverImageURL": null
+  },
+  {
+    "id": "mock-012",
+    "title": "El juego de Ender",
+    "author": "Orson Scott Card",
+    "price": 14.6,
+    "currencyCode": "USD",
+    "description": "Un niño prodigio es entrenado en una academia militar espacial para liderar la defensa de la humanidad frente a una invasión alienígena.",
+    "coverImageURL": null
+  }
+]
