@@ -23,6 +23,14 @@ struct CatalogView: View {
                         viewModel.showFavoritesOnly ? "Mostrando solo favoritos" : "Mostrar solo favoritos"
                     )
                 }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink {
+                        CartView(viewModel: container.cartViewModel)
+                    } label: {
+                        Image(systemName: "cart")
+                    }
+                    .accessibilityLabel("Ver carrito")
+                }
             }
             .task {
                 if case .loading = viewModel.state {

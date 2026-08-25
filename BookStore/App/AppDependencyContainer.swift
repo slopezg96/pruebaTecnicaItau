@@ -35,4 +35,13 @@ final class AppDependencyContainer {
             addToCartUseCase: AddToCartUseCase(repository: cartRepository)
         )
     }
+
+    /// Instancia compartida (no una nueva por pantalla): así el carrito
+    /// refleja lo agregado desde el detalle sin depender de persistencia.
+    @MainActor
+    private(set) lazy var cartViewModel: CartViewModel = CartViewModel(
+        cartRepository: cartRepository,
+        removeFromCartUseCase: RemoveFromCartUseCase(repository: cartRepository),
+        cartTotalUseCase: CartTotalUseCase()
+    )
 }
