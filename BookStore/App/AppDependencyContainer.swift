@@ -21,6 +21,7 @@ final class AppDependencyContainer {
     func makeCatalogViewModel() -> CatalogViewModel {
         CatalogViewModel(
             getBooksUseCase: GetBooksUseCase(repository: booksRepository),
+            toggleFavoriteUseCase: ToggleFavoriteUseCase(repository: favoritesRepository),
             favoritesRepository: favoritesRepository
         )
     }

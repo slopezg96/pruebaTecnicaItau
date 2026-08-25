@@ -12,6 +12,18 @@ struct CatalogView: View {
     var body: some View {
         content
             .navigationTitle("Catálogo")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        viewModel.showFavoritesOnly.toggle()
+                    } label: {
+                        Image(systemName: viewModel.showFavoritesOnly ? "heart.fill" : "heart")
+                    }
+                    .accessibilityLabel(
+                        viewModel.showFavoritesOnly ? "Mostrando solo favoritos" : "Mostrar solo favoritos"
+                    )
+                }
+            }
             .task {
                 if case .loading = viewModel.state {
                     await viewModel.load()
@@ -31,11 +43,24 @@ struct CatalogView: View {
                 } label: {
                     BookRowView(book: book, isFavorite: viewModel.isFavorite(book))
                 }
+                .swipeActions(edge: .trailing) {
+                    Button {
+                        viewModel.toggleFavorite(book)
+                    } label: {
+                        Label(
+                            viewModel.isFavorite(book) ? "Quitar de favoritos" : "Agregar a favoritos",
+                            systemImage: viewModel.isFavorite(book) ? "heart.slash" : "heart"
+                        )
+                    }
+                    .tint(.red)
+                }
             }
             .listStyle(.plain)
             .refreshable { await viewModel.refresh() }
         case .empty:
-            EmptyStateView(message: "No hay libros disponibles en este momento.")
+            EmptyStateView(message: viewModel.showFavoritesOnly
+                ? "Aún no marcaste libros como favoritos."
+                : "No hay libros disponibles en este momento.")
         case .error(let message):
             ErrorStateView(message: message) {
                 Task { await viewModel.load() }
