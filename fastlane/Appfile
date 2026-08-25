@@ -1,0 +1,3 @@
+app_identifier("com.slopezg96.bookstore")
+# No se configura apple_id / team_id: los lanes de este proyecto (test, build)
+# solo compilan y prueban para simulador, sin firma ni distribución.

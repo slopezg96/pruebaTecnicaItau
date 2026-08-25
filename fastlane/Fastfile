@@ -1,0 +1,31 @@
+default_platform(:ios)
+
+WORKSPACE = "BookStore.xcworkspace"
+SCHEME = "BookStore"
+SIMULATOR_NAME = "iPhone 17"
+
+platform :ios do
+  desc "Corre la suite de tests unitarios (BookStoreTests) en simulador"
+  lane :test do
+    run_tests(
+      workspace: WORKSPACE,
+      scheme: SCHEME,
+      devices: [SIMULATOR_NAME],
+      xcargs: "CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO"
+    )
+  end
+
+  desc "Compila la app para simulador (sin firma), sin generar .ipa"
+  lane :build do
+    sh(
+      "xcodebuild",
+      "-workspace", "../#{WORKSPACE}",
+      "-scheme", SCHEME,
+      "-destination", "platform=iOS Simulator,name=#{SIMULATOR_NAME}",
+      "-configuration", "Debug",
+      "CODE_SIGNING_ALLOWED=NO",
+      "CODE_SIGNING_REQUIRED=NO",
+      "build"
+    )
+  end
+end
