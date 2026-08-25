@@ -2,9 +2,13 @@ import SwiftUI
 
 @main
 struct BookStoreApp: App {
+    private let container = AppDependencyContainer()
+
     var body: some Scene {
         WindowGroup {
-            Text("BookStore")
+            NavigationStack {
+                CatalogView(viewModel: container.makeCatalogViewModel())
+            }
         }
     }
 }
