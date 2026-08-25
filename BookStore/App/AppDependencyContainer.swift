@@ -6,6 +6,7 @@ import Foundation
 final class AppDependencyContainer {
     private let booksRepository: BooksRepositoryProtocol
     private let favoritesRepository: FavoritesRepositoryProtocol
+    private let cartRepository: CartRepositoryProtocol
 
     init() {
         self.booksRepository = BooksRepositoryImpl(
@@ -13,6 +14,7 @@ final class AppDependencyContainer {
             localDataSource: MockBooksDataSource()
         )
         self.favoritesRepository = FavoritesRepositoryImpl()
+        self.cartRepository = InMemoryCartRepository()
     }
 
     @MainActor
@@ -20,6 +22,16 @@ final class AppDependencyContainer {
         CatalogViewModel(
             getBooksUseCase: GetBooksUseCase(repository: booksRepository),
             favoritesRepository: favoritesRepository
+        )
+    }
+
+    @MainActor
+    func makeDetailViewModel(book: Book) -> BookDetailViewModel {
+        BookDetailViewModel(
+            book: book,
+            toggleFavoriteUseCase: ToggleFavoriteUseCase(repository: favoritesRepository),
+            favoritesRepository: favoritesRepository,
+            addToCartUseCase: AddToCartUseCase(repository: cartRepository)
         )
     }
 }

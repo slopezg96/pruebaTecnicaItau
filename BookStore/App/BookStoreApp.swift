@@ -7,7 +7,7 @@ struct BookStoreApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                CatalogView(viewModel: container.makeCatalogViewModel())
+                CatalogView(viewModel: container.makeCatalogViewModel(), container: container)
             }
         }
     }

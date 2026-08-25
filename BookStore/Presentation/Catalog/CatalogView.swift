@@ -2,9 +2,11 @@ import SwiftUI
 
 struct CatalogView: View {
     @StateObject private var viewModel: CatalogViewModel
+    let container: AppDependencyContainer
 
-    init(viewModel: CatalogViewModel) {
+    init(viewModel: CatalogViewModel, container: AppDependencyContainer) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        self.container = container
     }
 
     var body: some View {
@@ -25,7 +27,7 @@ struct CatalogView: View {
         case .loaded(let books):
             List(books) { book in
                 NavigationLink {
-                    Text(book.title)
+                    BookDetailView(viewModel: container.makeDetailViewModel(book: book))
                 } label: {
                     BookRowView(book: book, isFavorite: viewModel.isFavorite(book))
                 }
