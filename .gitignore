@@ -1,0 +1,38 @@
+# Xcode
+build/
+DerivedData/
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+*.xcworkspace/xcshareddata/swiftpm
+*.xcuserstate
+xcuserdata/
+
+# Nota: los .xcodeproj SÍ se versionan (generados con XcodeGen a partir de project.yml,
+# pero se commitean para que el proyecto compile sin depender de tener XcodeGen instalado).
+# `xcodegen generate` los regenera si project.yml cambia.
+
+# CocoaPods
+Pods/
+# Podfile.lock IS committed on purpose (reproducible builds)
+
+# Bundler
+vendor/bundle/
+.bundle/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+fastlane/builds/
+
+# XCFramework build artifacts
+build_xcframework/
+*.xcframework/
+*.xcarchive
+
+# SwiftLint
+.swiftlint_cache/
+
+# macOS
+.DS_Store
