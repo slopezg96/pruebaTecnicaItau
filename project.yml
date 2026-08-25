@@ -13,12 +13,19 @@ settings:
     CODE_SIGNING_REQUIRED: "NO"
     CODE_SIGNING_ALLOWED: "NO"
 
+projectReferences:
+  BookStoreNetworkingKit:
+    path: BookStoreNetworkingKit/BookStoreNetworkingKit.xcodeproj
+
 targets:
   BookStore:
     type: application
     platform: iOS
     sources:
       - path: BookStore
+    dependencies:
+      - target: BookStoreNetworkingKit/BookStoreNetworkingKit
+        embed: true
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.slopezg96.bookstore

@@ -5,6 +5,9 @@
       location = "group:BookStore.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:BookStoreNetworkingKit/BookStoreNetworkingKit.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>
