@@ -1,0 +1,13 @@
+excluded:
+  - Pods
+  - vendor
+  - BookStoreNetworkingKit/build
+  - build_xcframework
+
+opt_in_rules:
+  - empty_count
+  - closure_spacing
+
+line_length:
+  warning: 140
+  error: 200
