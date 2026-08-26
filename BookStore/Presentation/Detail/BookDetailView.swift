@@ -16,10 +16,12 @@ struct BookDetailView: View {
                 VStack(alignment: .leading, spacing: 8) {
                     Text(viewModel.book.title)
                         .font(.title2)
-                        .bold()
+                        .fontWeight(.bold)
+                        .fixedSize(horizontal: false, vertical: true)
                     Text(viewModel.book.author)
                         .font(.headline)
                         .foregroundStyle(.secondary)
+                        .lineLimit(2)
                     Text(viewModel.book.price, format: .currency(code: viewModel.book.currencyCode))
                         .font(.title3)
                     Text(viewModel.book.bookDescription)
@@ -28,34 +30,40 @@ struct BookDetailView: View {
                 }
                 .padding(.horizontal)
 
-                HStack(spacing: 12) {
-                    Button {
-                        viewModel.toggleFavorite()
-                    } label: {
-                        Label(
-                            viewModel.isFavorite ? "Quitar de favoritos" : "Agregar a favoritos",
-                            systemImage: viewModel.isFavorite ? "heart.fill" : "heart"
-                        )
-                    }
-                    .buttonStyle(.bordered)
-
-                    Button {
-                        viewModel.addToCart()
-                        showAddedToCartConfirmation = true
-                    } label: {
-                        Label("Agregar al carrito", systemImage: "cart.badge.plus")
-                    }
-                    .buttonStyle(.borderedProminent)
-                }
-                .padding(.horizontal)
+                addToCartButton
+                    .padding(.horizontal)
             }
             .padding(.vertical)
         }
         .navigationTitle(viewModel.book.title)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    viewModel.toggleFavorite()
+                } label: {
+                    Image(systemName: viewModel.isFavorite ? "heart.fill" : "heart")
+                }
+                .accessibilityLabel(viewModel.isFavorite ? "Quitar de favoritos" : "Agregar a favoritos")
+            }
+        }
         .alert("Agregado al carrito", isPresented: $showAddedToCartConfirmation) {
             Button("OK", role: .cancel) {}
         }
+    }
+
+    private var addToCartButton: some View {
+        Button {
+            viewModel.addToCart()
+            showAddedToCartConfirmation = true
+        } label: {
+            Label("Agregar al carrito", systemImage: "cart.badge.plus")
+                .lineLimit(1)
+                .minimumScaleFactor(0.85)
+                .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(.borderedProminent)
+        .controlSize(.large)
     }
 
     @ViewBuilder
