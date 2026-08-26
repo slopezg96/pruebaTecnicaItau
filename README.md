@@ -85,12 +85,32 @@ bundle exec fastlane test   # corre la suite de tests unitarios (XCTest)
 bundle exec fastlane build  # compila la app para simulador, sin firma
 ```
 
+## Demo de la integración CocoaPods + Fastlane
+
+```bash
+./Scripts/demo.sh
+```
+
+Encadena `bundle install → pod install → fastlane test → fastlane build`
+y abre el reporte HTML de los tests (`fastlane/test_output/report.html`) al
+final. Pensado para correr con un solo comando durante una demo en vivo;
+detecta automáticamente si hace falta el Ruby de Homebrew (ver
+"Requisitos previos").
+
 ## Regenerar los proyectos Xcode (solo si modificás project.yml)
 
 ```bash
 xcodegen generate                                  # target de la app
 (cd BookStoreNetworkingKit && xcodegen generate)    # target del XCFramework
+bundle exec pod install                             # reintegra CocoaPods
 ```
+
+Importante: `xcodegen generate` reescribe `BookStore.xcodeproj` desde cero a
+partir de `project.yml` y no sabe nada de CocoaPods, así que borra la
+integración (`Pods_BookStore.framework`, xcconfig, el build phase "Check
+Pods Manifest.lock") que `pod install` había agregado. Por eso, después de
+regenerar el proyecto hay que correr `bundle exec pod install` de nuevo
+para reintegrarlo.
 
 ## Tests
 
