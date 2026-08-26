@@ -32,7 +32,8 @@ final class AppDependencyContainer {
             book: book,
             toggleFavoriteUseCase: ToggleFavoriteUseCase(repository: favoritesRepository),
             favoritesRepository: favoritesRepository,
-            addToCartUseCase: AddToCartUseCase(repository: cartRepository)
+            addToCartUseCase: AddToCartUseCase(repository: cartRepository),
+            cartRepository: cartRepository
         )
     }
 

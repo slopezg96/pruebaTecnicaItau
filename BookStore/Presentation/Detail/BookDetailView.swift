@@ -30,8 +30,13 @@ struct BookDetailView: View {
                 }
                 .padding(.horizontal)
 
-                addToCartButton
-                    .padding(.horizontal)
+                VStack(alignment: .leading, spacing: 10) {
+                    if viewModel.cartQuantity > 0 {
+                        cartStatusBadge
+                    }
+                    addToCartButton
+                }
+                .padding(.horizontal)
             }
             .padding(.vertical)
         }
@@ -47,9 +52,25 @@ struct BookDetailView: View {
                 .accessibilityLabel(viewModel.isFavorite ? "Quitar de favoritos" : "Agregar a favoritos")
             }
         }
+        .onAppear {
+            viewModel.refreshCartQuantity()
+        }
         .alert("Agregado al carrito", isPresented: $showAddedToCartConfirmation) {
             Button("OK", role: .cancel) {}
+        } message: {
+            Text("Ahora tenés \(viewModel.cartQuantity) en tu carrito.")
         }
+    }
+
+    private var cartStatusBadge: some View {
+        Label(
+            viewModel.cartQuantity == 1
+                ? "Ya tenés 1 en tu carrito"
+                : "Ya tenés \(viewModel.cartQuantity) en tu carrito",
+            systemImage: "checkmark.circle.fill"
+        )
+        .font(.subheadline)
+        .foregroundStyle(.green)
     }
 
     private var addToCartButton: some View {
