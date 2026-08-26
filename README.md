@@ -111,7 +111,7 @@ Ver [`ARCHITECTURE.md`](./ARCHITECTURE.md) para el detalle completo. Resumen:
   catálogo mock local embebido si la llamada falla o no trae precio
   comercial.
 - **Favoritos**: `UserDefaults` + `Codable`.
-- **Carrito**: en memoria (no persistido), por requisito del enunciado.
+- **Carrito**: en memoria (no persistido); vive mientras la app está abierta.
 - **XCFramework**: encapsula el networking (URLSession + parseo de la
   respuesta de Google Books).
 - **CocoaPods**: se agrega únicamente SwiftLint; no se necesitó ninguna

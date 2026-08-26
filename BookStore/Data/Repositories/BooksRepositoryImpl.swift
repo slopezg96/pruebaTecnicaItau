@@ -1,7 +1,7 @@
 /// Implementación de `BooksRepositoryProtocol`: intenta la fuente remota
 /// (Google Books) primero y, si falla o no devuelve resultados, cae
-/// automáticamente a la fuente local mock — así la app nunca se queda
-/// bloqueada en un estado de error por inestabilidad de red durante la demo.
+/// automáticamente a la fuente local mock, evitando que un fallo o una
+/// inestabilidad de red bloqueen el catálogo en un estado de error.
 final class BooksRepositoryImpl: BooksRepositoryProtocol {
     private let remoteDataSource: RemoteBooksDataSourceProtocol
     private let localDataSource: LocalBooksDataSourceProtocol

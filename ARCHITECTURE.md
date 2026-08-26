@@ -69,27 +69,25 @@ booleanas sueltas (`isLoading`, `hasError`, etc.), con vistas reutilizables
 
 1. **XCFramework de networking, no de persistencia.** Se eligió networking
    porque es la pieza más natural de encapsular como módulo reutilizable
-   (independiente de la fuente de persistencia elegida) y porque el prompt
-   pedía explícitamente que "la llamada de red y su parseo" viva ahí si se
-   optaba por esa opción.
+   e independiente de la fuente de persistencia elegida: la llamada de red
+   y su parseo (DTOs de Google Books) viven enteramente dentro del
+   framework, detrás de `NetworkClientProtocol`/`BooksAPIServiceProtocol`.
 
-2. **Fuente de datos: Google Books API real + fallback automático a mock**
-   (decisión confirmada explícitamente por el usuario). `BooksRepositoryImpl`
-   intenta primero la API real y, ante cualquier error o respuesta vacía,
-   cae al catálogo mock local — así la demo nunca queda bloqueada en un
-   estado de error por inestabilidad de red. Esto se validó en la práctica
-   durante el desarrollo: probando la Google Books API desde este entorno
-   se recibió `HTTP 429` (rate limit) en varias ocasiones, y el fallback
-   permitió que la app siguiera funcionando con datos mock sin cambios de
-   código.
+2. **Fuente de datos: Google Books API real + fallback automático a mock.**
+   `BooksRepositoryImpl` intenta primero la API real y, ante cualquier
+   error o respuesta vacía, cae al catálogo mock local, evitando que el
+   catálogo quede bloqueado en un estado de error por inestabilidad de red.
+   Esto se validó en la práctica durante el desarrollo: probando la Google
+   Books API desde este entorno se recibió `HTTP 429` (rate limit) en
+   varias ocasiones, y el fallback permitió que la app siguiera
+   funcionando con datos mock sin cambios de código.
 
 3. **Precio de respaldo determinista.** Google Books no siempre devuelve
    `saleInfo.listPrice` (depende de la disponibilidad comercial del volumen
    y de la región). Cuando falta, `BookMapper` deriva un precio determinista
    a partir de un hash del id del volumen (mismo id → siempre el mismo
-   precio), para que el catálogo siempre muestre un precio como pide el
-   punto 3.1 del enunciado. Es una decisión pragmática para la demo,
-   documentada también como comentario en el código.
+   precio), para que el catálogo siempre muestre un precio. Es una decisión
+   pragmática, documentada también como comentario en el código.
 
 4. **Persistencia de favoritos con `UserDefaults` + `Codable`, no CoreData.**
    El alcance es una lista simple de libros favoritos (sin relaciones,
@@ -97,18 +95,18 @@ booleanas sueltas (`isLoading`, `hasError`, etc.), con vistas reutilizables
    complejidad (modelo `.xcdatamodeld`, `NSManagedObjectContext`, mapeos)
    sin beneficio real para este caso de uso.
 
-5. **Carrito en memoria, no persistido.** Requisito explícito del punto 3.3
-   del enunciado ("el estado del carrito puede vivir en memoria").
+5. **Carrito en memoria, no persistido.** El carrito vive mientras la app
+   está abierta y no necesita sobrevivir a un reinicio.
    `InMemoryCartRepository` vive como instancia compartida en el DI
-   container mientras la app está abierta, inyectada tanto en el detalle
-   (agregar) como en el carrito (ver/quitar).
+   container, inyectada tanto en el detalle (agregar) como en el carrito
+   (ver/quitar).
 
 6. **CocoaPods con un único pod (SwiftLint).** No se integró ninguna
    librería de networking (Alamofire) ni de imágenes (Kingfisher/SDWebImage)
    porque `URLSession` (dentro del XCFramework) y `AsyncImage` (SwiftUI
    nativo) cubren esas necesidades sin dependencias adicionales. Se
-   mantiene CocoaPods igualmente, integrado y funcional, para cumplir el
-   requisito de gestión de dependencias del enunciado.
+   mantiene CocoaPods igualmente, integrado y funcional, como gestor de
+   dependencias del proyecto.
 
 7. **Proyecto Xcode generado con XcodeGen.** El desarrollo se hizo 100%
    desde la línea de comandos, sin editor Xcode disponible para generar los
@@ -126,9 +124,8 @@ booleanas sueltas (`isLoading`, `hasError`, etc.), con vistas reutilizables
    Bundler configurado en modo local al proyecto (`vendor/bundle`), sin
    instalar ninguna gem globalmente.
 
-9. **Idioma de commits: español**, Conventional Commits (`feat:`, `fix:`,
-   `build:`, `docs:`, `test:`, `chore:`) — decisión confirmada por el
-   usuario.
+9. **Idioma de commits: español**, con Conventional Commits (`feat:`,
+   `fix:`, `build:`, `docs:`, `test:`, `chore:`).
 
 10. **Sin UIKit.** Toda la UI es SwiftUI (`NavigationStack`, `List`,
     `AsyncImage`, `.refreshable`, `.swipeActions`); no fue necesario ningún

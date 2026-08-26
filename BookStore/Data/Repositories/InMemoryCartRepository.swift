@@ -1,7 +1,6 @@
-/// El carrito no es un requisito de persistencia (punto 3.3 del prompt): vive
-/// en memoria mientras la app está abierta. Se inyecta como instancia
-/// compartida desde el DI container para sobrevivir a la navegación entre
-/// pantallas.
+/// Estado del carrito en memoria: vive mientras la app está abierta y no
+/// sobrevive a un reinicio. Se inyecta como instancia compartida desde el
+/// DI container para sobrevivir a la navegación entre pantallas.
 final class InMemoryCartRepository: CartRepositoryProtocol {
     private var items: [CartItem] = []
 
